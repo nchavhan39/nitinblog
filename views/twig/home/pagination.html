@@ -1,0 +1,10 @@
+{% for key, value in data| slice(0,3) %}  
+<div class="card">
+  <h2>{{ value.title }}</h2>
+  <h5>{{ value.discription }}, {{ value.date }}</h5>
+  <!-- <div class="fakeimg" style="height:200px;">Image</div> -->
+  <p>{{ value.blog }}</p>
+  <input type="button" onclick="window.location.href='/nitin/home/edit_blog?id={{ value.id }}'" value="Edit">
+  <input type="button" onclick="dlt({{ value.id }})" value="delete">
+</div>
+{% endfor %}

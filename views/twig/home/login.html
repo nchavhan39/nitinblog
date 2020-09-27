@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>Home</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nitin/asset/css/theater.css" type="text/css" />
+<script type="text/javascript" src="/nitin/asset/js/error.js"></script> 
+</head>
+
+<body>
+<div class="viewlogin">
+	<div class="common_wrapper login">
+    	<div class="log_wrap">
+        	<p class="title_log">Hey Admin, please <span>Login</span></p>
+            <ul>
+            	<li><input type="text" class="common_field" placeholder="Username" id="username"></li>
+            	<li><input type="password" class="common_field" placeholder="Password" id="pass"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="btn_login">
+	<a href="javascript:void(0)" class="login_btn">Login</a>
+</div>
+<script type="text/javascript" src="/nitin/asset/js/jquery-1.12.0.min.js"></script> 
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$('.login_btn').click(function(){
+    var id = $('#username').val();
+    var pass = $('#pass').val();
+    if(id==''){
+        alert("please enter username");
+        ('#username').focus();
+        return false;
+    }
+    if(pass==''){
+        alert("please enter passwprd");
+        ('#pass').focus();
+        return false;
+    }
+$.ajax({
+    url: '/nitin/home/login_check',
+    data: { "username": id,  "pass": pass },
+    type: 'POST',
+    //dataType: 'json',
+    success: function(result)
+    {
+        //console.log(result);
+        if(result == 'fail'){
+            alert(error[101]);
+            window.open("/nitin/home","_self");
+            return false;
+        }else if(result=='success'){
+			window.open("/nitin/home/login_success","_self")
+		}else{
+            alert('something went wrong');
+            return false;
+        }
+    }
+});
+});
+</script>
